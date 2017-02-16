@@ -20,19 +20,36 @@ function initializePage() {
 function addProjectDetails(e) {
 	// Prevent following the link
 	e.preventDefault();
-
-	// Get the div ID, e.g., "project3"
-	var projectID = $(this).closest('.project').attr('id');
+    var projectID = $(this).closest('.project').attr('id');
 	// get rid of 'project' from the front of the id 'project3'
 	var idNumber = projectID.substr('project'.length);
 
+	var targetURL = "/project/" + idNumber;
+	console.log(targetURL)
+	
+	$.get(targetURL, function(result){
+		console.log(result);
+		var projectDetails = "<img class='detailsImage' src='" + 
+		result.image+"'> </img><p>"+result.title+"</p><p>" +
+		result.date+"</p><p>"+result.summary+"</p>"
+		$('#details'+projectID).html(projectDetails);
+	});
+
 	console.log("User clicked on project " + idNumber);
 }
+
 
 /*
  * Make an AJAX call to retrieve a color palette for the site
  * and apply it
  */
+
+ //couldn't finish the color parts during lab time
+
 function randomizeColors(e) {
 	console.log("User clicked on color button");
+	// $.get("/palette", function(result){
+	// 	
+	// })
+
 }
